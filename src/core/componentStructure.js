@@ -1,6 +1,16 @@
-const getHtmlElementFromNode = ({ el }) => el;
-const addContext = (domElement, context) =>
-  (domElement.__draggable_context = context);
+const getHtmlElementFromNode = (node) => {
+  if (!node.el && node.children && node.children.length > 0 && node.children[0].el) {
+    return node.children[0].el.parentElement;
+  } else {
+    return node.el;
+  }
+};
+const addContext = (domElement, context) => {
+  if (domElement) {
+    domElement.__draggable_context = context;
+  }
+}
+  
 const getContext = domElement => domElement.__draggable_context;
 
 class ComponentStructure {
